@@ -8,9 +8,20 @@
     tools:context=".MainActivity"
     android:orientation="vertical">
 
+    <ToggleButton
+        android:id="@+id/btnToggleLayout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="right"
+        android:layout_margin="8dp"
+        android:textOn="List View"
+        android:textOff="Grid View"
+        android:checked="false"/>
+
     <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rvWayang"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:id="@+id/rvWayang"/>
+        android:layout_height="0dp"
+        android:layout_weight="1" />
 
 </LinearLayout>
