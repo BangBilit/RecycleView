@@ -11,6 +11,16 @@ import com.example.recycleview.databinding.ItemRecyclerBinding
 class AdapterRecView(private val listWayang: ArrayList<DcWayang>) :
     RecyclerView.Adapter<AdapterRecView.ListViewHolder>() {
 
+    private lateinit var onItemClickCallback: OnItemClickCallback
+
+    fun setOnItemClickCallback(onItemClickCallback: OnItemClickCallback) {
+        this.onItemClickCallback = onItemClickCallback
+    }
+
+    interface OnItemClickCallback {
+        fun onItemClicked(data: DcWayang)
+    }
+
     class ListViewHolder(val binding: ItemRecyclerBinding) : RecyclerView.ViewHolder(binding.root)
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ListViewHolder {
@@ -41,7 +51,14 @@ class AdapterRecView(private val listWayang: ArrayList<DcWayang>) :
         }
 
         holder.binding.imageWayang.setOnClickListener {
-            Toast.makeText(holder.itemView.context, "Gambar ${wayang.nama} diklik", Toast.LENGTH_SHORT).show()
+            Toast.makeText(
+                holder.itemView.context,
+                "Gambar ${wayang.nama} diklik",
+                Toast.LENGTH_SHORT).show()
+
+            if(::onItemClickCallback.isInitialized) {
+                onItemClickCallback.onItemClicked(wayang)
+            }
         }
     }
 }
